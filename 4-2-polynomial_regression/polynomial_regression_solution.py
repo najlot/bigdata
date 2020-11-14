@@ -28,26 +28,25 @@ regression = linear_model.LinearRegression()
 # train the model using the training sets
 regression.fit(amazon_X, amazon_y)
 
-# TODO make predictions using the new data points
-amazon_y_pred = regression.predict(...)
+# make predictions using the new data points
+amazon_y_pred = regression.predict(amazon_X_pred)
 
-# TODO plot outputs
-fig.add_scatter(x=....flatten(), y=....flatten(), name='predictions (linear regression)')
+# plot outputs
+fig.add_scatter(x=amazon_X_pred.flatten(), y=amazon_y_pred.flatten(), name='predictions (linear regression)')
 
 # QUADRATIC REGRESSION
 # transform input data into format for quadratic polynomial
-# TODO generate polynomial transform
-poly = PolynomialFeatures(degree=...)
+poly = PolynomialFeatures(degree=2)
 # now transform all data
 X = poly.fit_transform(amazon_X)
 y = poly.fit_transform(amazon_y)
 X_pred = poly.fit_transform(amazon_X_pred)
 
 # with this transformed data, the normal linear regression model can be used
-# TODO fit model
-regression.fit(...)
-# TODO make predictions using the new data points
-amazon_y_pred_poly = ...
+# fit model
+regression.fit(X, y)
+# make predictions using the new data points
+amazon_y_pred_poly = regression.predict(X_pred)
 
 # add another plot
 fig.add_scatter(x=amazon_X_pred.flatten(), y=amazon_y_pred_poly[:, 1].flatten(),
